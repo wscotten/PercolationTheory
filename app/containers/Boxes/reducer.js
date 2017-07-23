@@ -34,31 +34,31 @@ const createSetTimeoutArray = (Boxes, ProbabilityInput, RefreshInput) => {
       if(i % GRID_WIDTH === 0) { // LEFT
         const surroundingBoxes = [
           i - GRID_WIDTH,
-          i - GRID_WIDTH - 1,
+          i - (GRID_WIDTH - 1),
           i + 1,
           i + GRID_WIDTH,
-          i + GRID_WIDTH + 1,
+          i + (GRID_WIDTH + 1),
         ];
         return checkSurroundingBoxes(Boxes, box, i, counter, surroundingBoxes);
       } else if ((i + 1) % 20 === 0) { // RIGHT
         const surroundingBoxes = [
-          (i - GRID_WIDTH) + 1,
+          i - (GRID_WIDTH + 1),
           i - GRID_WIDTH,
           i - 1,
-          (i + GRID_WIDTH) - 1,
+          i + (GRID_WIDTH - 1),
           i + GRID_WIDTH,
         ];
         return checkSurroundingBoxes(Boxes, box, i, counter, surroundingBoxes);
       }
       const surroundingBoxes = [
-        (i - GRID_WIDTH) + 1,
+        i - (GRID_WIDTH + 1),
         i - GRID_WIDTH,
-        i - GRID_WIDTH - 1,
+        i - (GRID_WIDTH - 1),
         i - 1,
         i + 1,
-        (i + GRID_WIDTH) - 1,
+        i + (GRID_WIDTH - 1),
         i + GRID_WIDTH,
-        i + GRID_WIDTH + 1,
+        i + (GRID_WIDTH + 1),
       ];
       return checkSurroundingBoxes(Boxes, box, i, counter, surroundingBoxes);
     });
