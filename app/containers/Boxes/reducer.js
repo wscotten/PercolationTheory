@@ -82,7 +82,7 @@ export default function Boxes(
       if (
         ProbabilityInput !== '' &&
         RefreshInput !== '' &&
-        StartButtonColor !== 'green'
+        StartButtonColor !== '#c3d7df'
       ) {
         return createSetTimeoutArray(Boxes, ProbabilityInput, RefreshInput);
       }
