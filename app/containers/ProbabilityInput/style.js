@@ -11,6 +11,9 @@ const style = ({ onChangeText }) => (
       height: 20,
       marginLeft: '10%',
     }}
+    autoFocus
+    keyboardType={'numeric'}
+    maxLength={4}
     onChangeText={text => onChangeText(text)}
   />
 );

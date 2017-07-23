@@ -24,8 +24,7 @@ const createSetTimeoutArray = (Boxes, ProbabilityInput, RefreshInput) => {
     return box;
   };
   let counter = 0;
-  // Boxes.indexOf(0) !== -1
-  while (counter < 100) {
+  while (Boxes.indexOf(0) !== -1) {
     counter++;
     Boxes = Boxes.map((box, i) => {
       if (box !== 0) return box;
