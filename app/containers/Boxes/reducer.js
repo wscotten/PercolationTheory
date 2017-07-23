@@ -1,9 +1,12 @@
 import { store } from '../../../App';
+
 const CHANGE_ARRAY_COLORS = 'CHANGE_ARRAY_COLORS';
 const START_BUTTON_CLICKED = 'START_BUTTON_CLICKED';
 const CLEAR_ARRAY = 'CLEAR_ARRAY';
+const GRID_WIDTH = 20;
+const GRID_HEIGHT = 32;
 
-const updateBoxes = Boxes =>
+const changeArrayColors = Boxes =>
   Boxes.map((box) => {
     if (box > 1) {
       return box - 1;
@@ -28,34 +31,34 @@ const createSetTimeoutArray = (Boxes, ProbabilityInput, RefreshInput) => {
     counter++;
     Boxes = Boxes.map((box, i) => {
       if (box !== 0) return box;
-      if(i % 20 === 0) { // LEFT
+      if(i % GRID_WIDTH === 0) { // LEFT
         const surroundingBoxes = [
-          i - 20,
-          i - 19,
+          i - GRID_WIDTH,
+          i - GRID_WIDTH - 1,
           i + 1,
-          i + 20,
-          i + 21,
+          i + GRID_WIDTH,
+          i + GRID_WIDTH + 1,
         ];
         return checkSurroundingBoxes(Boxes, box, i, counter, surroundingBoxes);
       } else if ((i + 1) % 20 === 0) { // RIGHT
         const surroundingBoxes = [
-          i - 21,
-          i - 20,
+          (i - GRID_WIDTH) + 1,
+          i - GRID_WIDTH,
           i - 1,
-          i + 19,
-          i + 20,
+          (i + GRID_WIDTH) - 1,
+          i + GRID_WIDTH,
         ];
         return checkSurroundingBoxes(Boxes, box, i, counter, surroundingBoxes);
       }
       const surroundingBoxes = [
-        i - 21,
-        i - 20,
-        i - 19,
+        (i - GRID_WIDTH) + 1,
+        i - GRID_WIDTH,
+        i - GRID_WIDTH - 1,
         i - 1,
         i + 1,
-        i + 19,
-        i + 20,
-        i + 21,
+        (i + GRID_WIDTH) - 1,
+        i + GRID_WIDTH,
+        i + GRID_WIDTH + 1,
       ];
       return checkSurroundingBoxes(Boxes, box, i, counter, surroundingBoxes);
     });
@@ -75,7 +78,7 @@ export default function Boxes(
   { type },
   { ProbabilityInput, RefreshInput, StartButtonColor },
 ) {
-  const initialArray = Array(640).fill(0);
+  const initialArray = Array(GRID_WIDTH * GRID_HEIGHT).fill(0);
   initialArray[310] = 1;
   switch (type) {
     case START_BUTTON_CLICKED:
@@ -88,7 +91,7 @@ export default function Boxes(
       }
       return Boxes;
     case CHANGE_ARRAY_COLORS:
-      return updateBoxes(Boxes);
+      return changeArrayColors(Boxes);
     case CLEAR_ARRAY:
       return [...initialArray];
     default:
