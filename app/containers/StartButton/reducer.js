@@ -1,3 +1,8 @@
+import {
+  START_BUTTON_RUNNING_COLOR,
+  START_BUTTON_STOPPED_COLOR,
+} from '../../constants';
+
 const START_BUTTON_CLICKED = 'START_BUTTON_CLICKED';
 const CLEAR_ARRAY = 'CLEAR_ARRAY';
 
@@ -15,13 +20,13 @@ export default function StartButtonColor(
       if (
         ProbabilityInput !== '' &&
         RefreshInput !== '' &&
-        color !== '#4484CE'
+        color !== START_BUTTON_RUNNING_COLOR
       ) {
-        return '#4484CE';
+        return START_BUTTON_RUNNING_COLOR;
       }
-      return 'red';
+      return START_BUTTON_STOPPED_COLOR;
     case CLEAR_ARRAY:
-      return 'red';
+      return START_BUTTON_STOPPED_COLOR;
     default:
       return color;
   }

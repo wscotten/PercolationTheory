@@ -1,22 +1,24 @@
 import { store } from '../../../App';
-import { GRID_WIDTH, GRID_HEIGHT, INITIAL_ARRAY } from '../../constants';
+import { GRID_WIDTH,
+  INITIAL_ARRAY,
+  START_BUTTON_RUNNING_COLOR,
+} from '../../constants';
 
 const CHANGE_ARRAY_COLORS = 'CHANGE_ARRAY_COLORS';
 const START_BUTTON_CLICKED = 'START_BUTTON_CLICKED';
 const CLEAR_ARRAY = 'CLEAR_ARRAY';
+const ROTATE_COLOR = 'ROTATE_COLOR';
 
-const changeArrayColors = Boxes =>
-  Boxes.map((box) => {
-    if (box > 1) {
-      return box - 1;
-    }
-    return box;
-  });
+export const rotateColor = (i, value) => ({
+  type: ROTATE_COLOR,
+  i,
+  value,
+});
 
 const createSetTimeoutArray = (Boxes, ProbabilityInput, RefreshInput) => {
   const checkSurroundingBoxes = (Boxes, box, i, counter, surroundingBoxes) => {
     const flaggedSurroundingBoxes = surroundingBoxes.filter((box) => {
-      return Boxes[box] !== undefined && Boxes[box] !== 0;
+      return Boxes[box] !== undefined && Boxes[box] > 0;
     });
     for (let i = 0; i < flaggedSurroundingBoxes.length; i++) {
       if (Math.random() < ProbabilityInput) {
@@ -74,23 +76,40 @@ const createSetTimeoutArray = (Boxes, ProbabilityInput, RefreshInput) => {
 
 export default function Boxes(
   Boxes,
-  { type },
+  { type, i, value },
   { ProbabilityInput, RefreshInput, StartButtonColor },
 ) {
   switch (type) {
     case START_BUTTON_CLICKED:
       if (
         ProbabilityInput !== '' &&
-        RefreshInput !== '' &&
-        StartButtonColor !== '#c3d7df'
+        RefreshInput !== ''
       ) {
         return createSetTimeoutArray(Boxes, ProbabilityInput, RefreshInput);
       }
       return Boxes;
     case CHANGE_ARRAY_COLORS:
-      return changeArrayColors(Boxes);
+      return Boxes.map((box) => {
+        if (box > 1) {
+          return box - 1;
+        }
+        return box;
+      });
     case CLEAR_ARRAY:
       return [...INITIAL_ARRAY];
+    case ROTATE_COLOR:
+      if (StartButtonColor !== START_BUTTON_RUNNING_COLOR) {
+        return Boxes.map((box, index) => {
+          if (index === i) {
+            if (value === -1) {
+              return 1;
+            }
+            return value - 1;
+          }
+          return box;
+        });
+      }
+      return Boxes;
     default:
       return Boxes;
   }

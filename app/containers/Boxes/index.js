@@ -1,13 +1,22 @@
 import { connect } from 'react-redux';
 import style from './style';
+import { rotateColor } from './reducer';
 
 const mapStateToProps = ({ Boxes }) => ({
   Boxes,
 });
 
-const ProbabilityInput = connect(
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onClick: (i, value) => {
+      dispatch(rotateColor(i, value));
+    },
+  };
+};
+
+const Boxes = connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(style);
 
-export default ProbabilityInput;
+export default Boxes;

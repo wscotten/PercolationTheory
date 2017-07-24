@@ -1,40 +1,57 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { GRID_WIDTH, GRID_HEIGHT } from '../../constants';
 
 const widthPercentage = ((1 / GRID_WIDTH) * 100).toString().concat('%');
 const heightPercentage = ((1 / GRID_HEIGHT) * 100).toString().concat('%');
 
-const blockDivs = Boxes =>
+const blockDivs = (Boxes, onClick) =>
   Boxes.map((block, i) => {
-    if (block === 1) {
-      return (
-        <View
-          style={{
-            width: widthPercentage,
-            height: heightPercentage,
-            borderWidth: 0.5,
-            backgroundColor: 'red',
-          }}
-          key={i.toString()}
-        />
-      );
+    switch (block) {
+      case 1:
+        return (
+          <TouchableOpacity
+            style={{
+              width: widthPercentage,
+              height: heightPercentage,
+              borderWidth: 0.5,
+              backgroundColor: 'red',
+            }}
+            key={i.toString()}
+            onPress={() => onClick(i, block)}
+          />
+        );
+      case -1:
+        return (
+          <TouchableOpacity
+            style={{
+              width: widthPercentage,
+              height: heightPercentage,
+              borderWidth: 0.5,
+              backgroundColor: 'gray',
+            }}
+            key={i.toString()}
+            onPress={() => onClick(i, block)}
+          />
+        );
+      default:
+        return (
+          <TouchableOpacity
+            style={{
+              width: widthPercentage,
+              height: heightPercentage,
+              borderWidth: 0.5,
+              backgroundColor: 'green',
+            }}
+            key={i.toString()}
+            onPress={() => onClick(i, block)}
+          />
+        );
     }
-    return (
-      <View
-        style={{
-          width: widthPercentage,
-          height: heightPercentage,
-          borderWidth: 0.5,
-          backgroundColor: 'green',
-        }}
-        key={i.toString()}
-      />
-    );
   });
 
-export default function style({ Boxes }) {
+export default function style({ Boxes, onClick }) {
   return (
     <View
       style={{
@@ -44,11 +61,12 @@ export default function style({ Boxes }) {
         flexWrap: 'wrap',
       }}
     >
-      {blockDivs(Boxes)}
+      {blockDivs(Boxes, onClick)}
     </View>
   );
 }
 
 style.propTypes = {
   Boxes: PropTypes.arrayOf(React.PropTypes.number).isRequired,
+  onClick: PropTypes.func.isRequired,
 };
