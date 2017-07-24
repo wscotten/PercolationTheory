@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
+import { GRID_WIDTH, GRID_HEIGHT } from '../../constants';
+
+const widthPercentage = ((1 / GRID_WIDTH) * 100).toString().concat('%');
+const heightPercentage = ((1 / GRID_HEIGHT) * 100).toString().concat('%');
 
 const blockDivs = Boxes =>
   Boxes.map((block, i) => {
@@ -8,8 +12,8 @@ const blockDivs = Boxes =>
       return (
         <View
           style={{
-            width: '5%',
-            height: '2%',
+            width: widthPercentage,
+            height: heightPercentage,
             borderWidth: 0.5,
             backgroundColor: 'red',
           }}
@@ -20,8 +24,8 @@ const blockDivs = Boxes =>
     return (
       <View
         style={{
-          width: '5%',
-          height: '2%',
+          width: widthPercentage,
+          height: heightPercentage,
           borderWidth: 0.5,
           backgroundColor: 'green',
         }}

@@ -1,10 +1,9 @@
 import { store } from '../../../App';
+import { GRID_WIDTH, GRID_HEIGHT, INITIAL_ARRAY } from '../../constants';
 
 const CHANGE_ARRAY_COLORS = 'CHANGE_ARRAY_COLORS';
 const START_BUTTON_CLICKED = 'START_BUTTON_CLICKED';
 const CLEAR_ARRAY = 'CLEAR_ARRAY';
-const GRID_WIDTH = 20;
-const GRID_HEIGHT = 32;
 
 const changeArrayColors = Boxes =>
   Boxes.map((box) => {
@@ -40,7 +39,7 @@ const createSetTimeoutArray = (Boxes, ProbabilityInput, RefreshInput) => {
           i + (GRID_WIDTH + 1),
         ];
         return checkSurroundingBoxes(Boxes, box, i, counter, surroundingBoxes);
-      } else if ((i + 1) % 20 === 0) { // RIGHT
+      } else if ((i + 1) % GRID_WIDTH === 0) { // RIGHT
         const surroundingBoxes = [
           i - (GRID_WIDTH + 1),
           i - GRID_WIDTH,
@@ -78,8 +77,6 @@ export default function Boxes(
   { type },
   { ProbabilityInput, RefreshInput, StartButtonColor },
 ) {
-  const initialArray = Array(GRID_WIDTH * GRID_HEIGHT).fill(0);
-  initialArray[310] = 1;
   switch (type) {
     case START_BUTTON_CLICKED:
       if (
@@ -93,7 +90,7 @@ export default function Boxes(
     case CHANGE_ARRAY_COLORS:
       return changeArrayColors(Boxes);
     case CLEAR_ARRAY:
-      return [...initialArray];
+      return [...INITIAL_ARRAY];
     default:
       return Boxes;
   }
