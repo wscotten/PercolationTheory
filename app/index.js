@@ -8,6 +8,9 @@ import ProbabilityInput from './containers/ProbabilityInput';
 import RefreshContainer from './components/RefreshContainer';
 import RefreshText from './components/RefreshText';
 import RefreshInput from './containers/RefreshInput';
+import RecoveryContainer from './components/RecoveryContainer';
+import RecoveryText from './components/RecoveryText';
+import RecoveryInput from './containers/RecoveryInput';
 import StartButton from './containers/StartButton';
 import GridBoxes from './containers/Boxes';
 
@@ -25,6 +28,11 @@ export default function index() {
           <RefreshText>(0 - 1)</RefreshText>
           <RefreshInput />
         </RefreshContainer>
+        <RecoveryContainer>
+          <RecoveryText>Recovery</RecoveryText>
+          <RecoveryText>(0 - 1)</RecoveryText>
+          <RecoveryInput />
+        </RecoveryContainer>
         <StartButton />
       </TextContainer>
       <GridBoxes />

@@ -17,11 +17,9 @@ export default function StartButtonColor(
 ) {
   switch (type) {
     case START_BUTTON_CLICKED:
-      if (
-        ProbabilityInput !== '' &&
-        RefreshInput !== '' &&
-        color !== START_BUTTON_RUNNING_COLOR
-      ) {
+      if (color === START_BUTTON_RUNNING_COLOR) {
+        return START_BUTTON_STOPPED_COLOR;
+      } else if (ProbabilityInput !== '' && RefreshInput !== '') {
         return START_BUTTON_RUNNING_COLOR;
       }
       return START_BUTTON_STOPPED_COLOR;

@@ -19,7 +19,6 @@ const style = ({ StartButtonColor, onStartClick }) => (
     }}
   >
     <StartText>Start</StartText>
-    <StartText>Simulation</StartText>
   </TouchableOpacity>
 );
 

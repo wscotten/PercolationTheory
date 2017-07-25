@@ -2,6 +2,7 @@ import { store } from '../../../App';
 import { GRID_WIDTH,
   INITIAL_ARRAY,
   START_BUTTON_RUNNING_COLOR,
+  START_BUTTON_STOPPED_COLOR,
 } from '../../constants';
 
 const CHANGE_ARRAY_COLORS = 'CHANGE_ARRAY_COLORS';
@@ -17,10 +18,10 @@ export const rotateColor = (i, value) => ({
 
 const createSetTimeoutArray = (Boxes, ProbabilityInput, RefreshInput) => {
   const checkSurroundingBoxes = (Boxes, box, i, counter, surroundingBoxes) => {
-    const flaggedSurroundingBoxes = surroundingBoxes.filter((box) => {
-      return Boxes[box] !== undefined && Boxes[box] > 0;
-    });
-    for (let i = 0; i < flaggedSurroundingBoxes.length; i++) {
+    const flaggedSurroundingBoxes = surroundingBoxes.filter(box =>
+      Boxes[box] !== undefined && Boxes[box] > 0,
+    );
+    for (let i = 0; i < flaggedSurroundingBoxes.length; i += 1) {
       if (Math.random() < ProbabilityInput) {
         return counter;
       }
@@ -29,10 +30,10 @@ const createSetTimeoutArray = (Boxes, ProbabilityInput, RefreshInput) => {
   };
   let counter = 0;
   while (Boxes.indexOf(0) !== -1) {
-    counter++;
+    counter += 1;
     Boxes = Boxes.map((box, i) => {
       if (box !== 0) return box;
-      if(i % GRID_WIDTH === 0) { // LEFT
+      if (i % GRID_WIDTH === 0) { // LEFT
         const surroundingBoxes = [
           i - GRID_WIDTH,
           i - (GRID_WIDTH - 1),
@@ -81,20 +82,22 @@ export default function Boxes(
 ) {
   switch (type) {
     case START_BUTTON_CLICKED:
-      if (
-        ProbabilityInput !== '' &&
-        RefreshInput !== ''
-      ) {
+      if (StartButtonColor === START_BUTTON_RUNNING_COLOR) {
+        return [...INITIAL_ARRAY];
+      } else if (ProbabilityInput !== '' && RefreshInput !== '') {
         return createSetTimeoutArray(Boxes, ProbabilityInput, RefreshInput);
       }
-      return Boxes;
+      return [...INITIAL_ARRAY];
     case CHANGE_ARRAY_COLORS:
-      return Boxes.map((box) => {
-        if (box > 1) {
-          return box - 1;
-        }
-        return box;
-      });
+      if (StartButtonColor !== START_BUTTON_STOPPED_COLOR) {
+        return Boxes.map((box) => {
+          if (box > 1) {
+            return box - 1;
+          }
+          return box;
+        });
+      }
+      return Boxes;
     case CLEAR_ARRAY:
       return [...INITIAL_ARRAY];
     case ROTATE_COLOR:

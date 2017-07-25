@@ -1,8 +1,5 @@
-make recovery Probability - if they recover after next turn never let them catch
+1. make recovery Probability - if they recover after next turn never let them catch
 it
-
-allow users to adjust grid size
-
-
+2. allow users to adjust grid size
 
 //allow users to mark red squares and dead squares
