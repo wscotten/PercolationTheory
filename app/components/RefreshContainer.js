@@ -1,7 +1,8 @@
 import styled from 'styled-components/native';
 
 const RefreshContainer = styled.View`
-  flex: 1;
+  width: 33%;
+  height: 50%;
   align-items: center;
   justify-content: center;
   background-color: #eee9e9;
