@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 import { View, TouchableOpacity } from 'react-native';
 import { GRID_WIDTH, GRID_HEIGHT } from '../../constants';
 
-const widthPercentage = ((1 / GRID_WIDTH) * 100).toString().concat('%');
-const heightPercentage = (55 / GRID_HEIGHT).toString().concat('%');
-
-const blockDivs = (Boxes, onClick) =>
+const blockDivs = (Boxes, onClick, widthPercentage, heightPercentage) =>
   Boxes.map((block, i) => {
     switch (block) {
       case 1:
@@ -51,7 +48,17 @@ const blockDivs = (Boxes, onClick) =>
     }
   });
 
-export default function style({ Boxes, onClick }) {
+export default function style({ Boxes, RowsInput, ColumnsInput, onClick }) {
+  const rowsInputNumber = Number(RowsInput);
+  const columnsInputNumber = Number(ColumnsInput);
+  const rows = Number.isInteger(rowsInputNumber) && RowsInput !== ''
+    ? rowsInputNumber
+    : GRID_HEIGHT;
+  const columns = Number.isInteger(columnsInputNumber) && ColumnsInput !== ''
+    ? columnsInputNumber
+    : GRID_WIDTH;
+  const widthPercentage = ((1 / columns) * 100).toString().concat('%');
+  const heightPercentage = (55 / rows).toString().concat('%');
   return (
     <View
       style={{
@@ -61,12 +68,14 @@ export default function style({ Boxes, onClick }) {
         flexWrap: 'wrap',
       }}
     >
-      {blockDivs(Boxes, onClick)}
+      {blockDivs(Boxes, onClick, widthPercentage, heightPercentage)}
     </View>
   );
 }
 
 style.propTypes = {
   Boxes: PropTypes.arrayOf(React.PropTypes.number).isRequired,
+  RowsInput: PropTypes.string.isRequired,
+  ColumnsInput: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
 };

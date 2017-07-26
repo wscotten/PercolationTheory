@@ -3,13 +3,12 @@ export const GRID_HEIGHT = 15;
 export const INITIAL_ARRAY = Array(GRID_WIDTH * GRID_HEIGHT).fill(0);
 export const START_BUTTON_RUNNING_COLOR = '#4484CE';
 export const START_BUTTON_STOPPED_COLOR = 'red';
-INITIAL_ARRAY[55] = 1;
 export const INITIAL_STATE = {
   ProbabilityInput: '',
   RefreshInput: '',
   RecoveryInput: '',
-  RowsInput: '',
-  ColumnsInput: '',
+  RowsInput: '15',
+  ColumnsInput: '10',
   StartButtonColor: START_BUTTON_STOPPED_COLOR,
   Boxes: INITIAL_ARRAY,
 };

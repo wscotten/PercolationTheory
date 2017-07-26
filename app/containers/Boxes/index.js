@@ -2,8 +2,10 @@ import { connect } from 'react-redux';
 import style from './style';
 import { rotateColor } from './reducer';
 
-const mapStateToProps = ({ Boxes }) => ({
+const mapStateToProps = ({ Boxes, RowsInput, ColumnsInput }) => ({
   Boxes,
+  RowsInput,
+  ColumnsInput,
 });
 
 const mapDispatchToProps = (dispatch) => {
