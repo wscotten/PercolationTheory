@@ -38,7 +38,7 @@ export const startButtonMiddleware = store => next => (action) => {
         Recovery > 0 && Recovery <= 1 &&
         Rows > 0 && Rows <= 20 && Number.isInteger(Rows) &&
         Columns > 0 && Columns <= 20 && Number.isInteger(Columns) &&
-        (Math.max(...Boxes) === 1)
+        (Boxes.indexOf(-1) !== -1)
       ) {
         store.dispatch({ type: SWAP_START_BUTTON_COLOR });
         store.dispatch({ type: START_SIMULATION });
@@ -65,8 +65,10 @@ export const boxesMiddleware = store => next => (action) => {
       }, RefreshInput * 1000);
       return next(action);
     case CHANGE_ARRAY_COLORS:
-      if (Math.max(...Boxes) === 1) {
-        store.dispatch({ type: CLEAR_ARRAY });
+      if (Math.max(...Boxes) <= -1) {
+        setTimeout(() => {
+          store.dispatch({ type: CLEAR_ARRAY });
+        }, RefreshInput * 1000);
       } else {
         setTimeout(() => {
           store.dispatch({ type: CHANGE_ARRAY_COLORS });
@@ -79,11 +81,6 @@ export const boxesMiddleware = store => next => (action) => {
 };
 
 export const rowsAndColumnsMiddleware = store => next => (action) => {
-  const {
-    RowsInput,
-    ColumnsInput,
-  } = store.getState();
-  console.log(action.text);
   switch (action.type) {
     case UPDATE_COLUMNS_INPUT:
       if (
