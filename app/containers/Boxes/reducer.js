@@ -1,10 +1,11 @@
-import { store } from '../../../App';
+import { store } from '/App';
 import { GRID_WIDTH,
-  INITIAL_ARRAY,
   START_BUTTON_RUNNING_COLOR,
   START_BUTTON_STOPPED_COLOR,
   START_SIMULATION,
-} from '../../constants';
+  UPDATE_COLUMNS_INPUT,
+  UPDATE_ROWS_INPUT,
+} from '/app/constants';
 
 const CHANGE_ARRAY_COLORS = 'CHANGE_ARRAY_COLORS';
 const CLEAR_ARRAY = 'CLEAR_ARRAY';
@@ -16,7 +17,7 @@ export const rotateColor = (i, value) => ({
   value,
 });
 
-const createSetTimeoutArray = (Boxes, ProbabilityInput, RefreshInput) => {
+const createSetTimeoutArray = (Boxes, ProbabilityInput) => {
   const checkSurroundingBoxes = (Boxes, box, i, counter, surroundingBoxes) => {
     const flaggedSurroundingBoxes = surroundingBoxes.filter(box =>
       Boxes[box] !== undefined && Boxes[box] > 0,
@@ -71,23 +72,35 @@ const createSetTimeoutArray = (Boxes, ProbabilityInput, RefreshInput) => {
 export default function Boxes(
   Boxes,
   { type, i, value },
-  { ProbabilityInput, RefreshInput, StartButtonColor },
+  { ProbabilityInput, RecoveryInput, StartButtonColor, RowsInput, ColumnsInput },
 ) {
   switch (type) {
+    case UPDATE_ROWS_INPUT:
+    case UPDATE_COLUMNS_INPUT:
+      return Array(RowsInput * ColumnsInput).fill(0);
     case START_SIMULATION:
-      return createSetTimeoutArray(Boxes, ProbabilityInput, RefreshInput);
+      return createSetTimeoutArray(Boxes, ProbabilityInput);
     case CHANGE_ARRAY_COLORS:
       if (StartButtonColor !== START_BUTTON_STOPPED_COLOR) {
         return Boxes.map((box) => {
-          if (box > 1) {
-            return box - 1;
+          switch (box) {
+            case (box === -2):
+              return box - 1;
+            case (box > 2):
+              return box - 1;
+            case (box === 2):
+              // if (Math.random() < RecoveryInput) {
+              //   return -2;
+              // }
+              return box - 1;
+            default:
+              return box;
           }
-          return box;
         });
       }
       return Boxes;
     case CLEAR_ARRAY:
-      return [...INITIAL_ARRAY];
+      return Array(RowsInput * ColumnsInput).fill(0);
     case ROTATE_COLOR:
       if (StartButtonColor !== START_BUTTON_RUNNING_COLOR) {
         return Boxes.map((box, index) => {

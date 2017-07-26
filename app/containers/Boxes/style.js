@@ -6,6 +6,19 @@ import { GRID_WIDTH, GRID_HEIGHT } from '../../constants';
 const blockDivs = (Boxes, onClick, widthPercentage, heightPercentage) =>
   Boxes.map((block, i) => {
     switch (block) {
+      case -2:
+        return (
+          <TouchableOpacity
+            style={{
+              width: widthPercentage,
+              height: heightPercentage,
+              borderWidth: 0.5,
+              backgroundColor: 'red',
+            }}
+            key={i.toString()}
+            onPress={() => onClick(i, block)}
+          />
+        );
       case 1:
         return (
           <TouchableOpacity
@@ -32,6 +45,19 @@ const blockDivs = (Boxes, onClick, widthPercentage, heightPercentage) =>
             onPress={() => onClick(i, block)}
           />
         );
+      case -3:
+        return (
+          <TouchableOpacity
+            style={{
+              width: widthPercentage,
+              height: heightPercentage,
+              borderWidth: 0.5,
+              backgroundColor: 'blue',
+            }}
+            key={i.toString()}
+            onPress={() => onClick(i, block)}
+          />
+        );
       default:
         return (
           <TouchableOpacity
@@ -49,16 +75,9 @@ const blockDivs = (Boxes, onClick, widthPercentage, heightPercentage) =>
   });
 
 export default function style({ Boxes, RowsInput, ColumnsInput, onClick }) {
-  const rowsInputNumber = Number(RowsInput);
-  const columnsInputNumber = Number(ColumnsInput);
-  const rows = Number.isInteger(rowsInputNumber) && RowsInput !== ''
-    ? rowsInputNumber
-    : GRID_HEIGHT;
-  const columns = Number.isInteger(columnsInputNumber) && ColumnsInput !== ''
-    ? columnsInputNumber
-    : GRID_WIDTH;
-  const widthPercentage = ((1 / columns) * 100).toString().concat('%');
-  const heightPercentage = (55 / rows).toString().concat('%');
+  console.log(Boxes.length);
+  const widthPercentage = ((1 / ColumnsInput) * 99.99).toString().concat('%');
+  const heightPercentage = ((1 / RowsInput) * 55).toString().concat('%');
   return (
     <View
       style={{

@@ -9,6 +9,7 @@ import reducers from '/app/reducers';
 import {
   startButtonMiddleware,
   boxesMiddleware,
+  rowsAndColumnsMiddleware,
 } from '/app/middleware';
 
 export const store = Reactotron.createStore(
@@ -17,6 +18,7 @@ export const store = Reactotron.createStore(
     createLogger(),
     startButtonMiddleware,
     boxesMiddleware,
+    rowsAndColumnsMiddleware,
   ),
 );
 
