@@ -81,13 +81,8 @@ export default function Boxes(
   { ProbabilityInput, RefreshInput, StartButtonColor },
 ) {
   switch (type) {
-    case START_BUTTON_CLICKED:
-      if (StartButtonColor === START_BUTTON_RUNNING_COLOR) {
-        return [...INITIAL_ARRAY];
-      } else if (ProbabilityInput !== '' && RefreshInput !== '') {
-        return createSetTimeoutArray(Boxes, ProbabilityInput, RefreshInput);
-      }
-      return [...INITIAL_ARRAY];
+    case 'START_SIMULATION':
+      return createSetTimeoutArray(Boxes, ProbabilityInput, RefreshInput);
     case CHANGE_ARRAY_COLORS:
       if (StartButtonColor !== START_BUTTON_STOPPED_COLOR) {
         return Boxes.map((box) => {

@@ -1,23 +1,21 @@
-import ProbabilityInput from './containers/ProbabilityInput/reducer';
-import RefreshInput from './containers/RefreshInput/reducer';
-import StartButtonColor from './containers/StartButton/reducer';
-import Boxes from './containers/Boxes/reducer';
-import { INITIAL_ARRAY } from './constants';
+import ProbabilityInput from '/app/containers/ProbabilityInput/reducer';
+import RefreshInput from '/app/containers/RefreshInput/reducer';
+import RecoveryInput from '/app/containers/RecoveryInput/reducer';
+import RowsInput from '/app/containers/RowsInput/reducer';
+import ColumnsInput from '/app/containers/ColumnsInput/reducer';
+import StartButtonColor from '/app/containers/StartButton/reducer';
+import Boxes from '/app/containers/Boxes/reducer';
+import { INITIAL_STATE } from '/app/constants';
 
 
-const initialState = {
-  ProbabilityInput: '',
-  RefreshInput: '',
-  StartButtonColor: 'red',
-  Boxes: INITIAL_ARRAY,
-};
-
-
-export default function (state = initialState, action) {
+export default function rootReducer(state = INITIAL_STATE, action) {
   return {
     ProbabilityInput: ProbabilityInput(state.ProbabilityInput, action),
     RefreshInput: RefreshInput(state.RefreshInput, action),
-    StartButtonColor: StartButtonColor(state.StartButtonColor, action, state),
+    RecoveryInput: RecoveryInput(state.RecoveryInput, action),
+    RowsInput: RowsInput(state.RowsInput, action),
+    ColumnsInput: ColumnsInput(state.ColumnsInput, action),
+    StartButtonColor: StartButtonColor(state.StartButtonColor, action),
     Boxes: Boxes(state.Boxes, action, state),
   };
 }

@@ -5,7 +5,7 @@ export const receiveInput = text => ({
   text,
 });
 
-export default function ColumnsInput(RowsInput, { type, text }) {
+export default function RowsInput(RowsInput, { type, text }) {
   switch (type) {
     case UPDATE_ROWS_INPUT:
       return text;

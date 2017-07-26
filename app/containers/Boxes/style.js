@@ -6,12 +6,6 @@ import { GRID_WIDTH, GRID_HEIGHT } from '../../constants';
 const widthPercentage = ((1 / GRID_WIDTH) * 100).toString().concat('%');
 const heightPercentage = (55 / GRID_HEIGHT).toString().concat('%');
 
-import { Dimensions } from 'react-native';
-import Reactotron from 'reactotron-react-native';
-var {height, width} = Dimensions.get('window');
-Reactotron.log(width);
-Reactotron.log(height);
-
 const blockDivs = (Boxes, onClick) =>
   Boxes.map((block, i) => {
     switch (block) {

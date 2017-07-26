@@ -4,3 +4,15 @@ export const INITIAL_ARRAY = Array(GRID_WIDTH * GRID_HEIGHT).fill(0);
 export const START_BUTTON_RUNNING_COLOR = '#4484CE';
 export const START_BUTTON_STOPPED_COLOR = 'red';
 INITIAL_ARRAY[55] = 1;
+export const INITIAL_STATE = {
+  ProbabilityInput: '',
+  RefreshInput: '',
+  RecoveryInput: '',
+  RowsInput: '',
+  ColumnsInput: '',
+  StartButtonColor: START_BUTTON_STOPPED_COLOR,
+  Boxes: INITIAL_ARRAY,
+};
+export const START_BUTTON_CLICKED = 'START_BUTTON_CLICKED';
+export const CLEAR_ARRAY = 'CLEAR_ARRAY';
+export const SWAP_START_BUTTON_COLOR = 'SWAP_START_BUTTON_COLOR';

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { TouchableOpacity, Keyboard } from 'react-native';
-import StartText from '../../components/StartText';
+import StartText from '/app/components/StartText';
 
 const style = ({ StartButtonColor, onStartClick }) => (
   <TouchableOpacity
@@ -11,6 +11,7 @@ const style = ({ StartButtonColor, onStartClick }) => (
       justifyContent: 'center',
       backgroundColor: StartButtonColor,
       borderWidth: 2,
+      borderTopWidth: 0,
       borderColor: '#c3d7df',
     }}
     onPress={() => {
