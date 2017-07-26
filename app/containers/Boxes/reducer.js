@@ -3,10 +3,10 @@ import { GRID_WIDTH,
   INITIAL_ARRAY,
   START_BUTTON_RUNNING_COLOR,
   START_BUTTON_STOPPED_COLOR,
+  START_SIMULATION,
 } from '../../constants';
 
 const CHANGE_ARRAY_COLORS = 'CHANGE_ARRAY_COLORS';
-const START_BUTTON_CLICKED = 'START_BUTTON_CLICKED';
 const CLEAR_ARRAY = 'CLEAR_ARRAY';
 const ROTATE_COLOR = 'ROTATE_COLOR';
 
@@ -65,13 +65,6 @@ const createSetTimeoutArray = (Boxes, ProbabilityInput, RefreshInput) => {
       return checkSurroundingBoxes(Boxes, box, i, counter, surroundingBoxes);
     });
   }
-  const temp = setInterval(() => {
-    store.dispatch({ type: CHANGE_ARRAY_COLORS });
-  }, RefreshInput * 1000);
-  setTimeout(() => {
-    clearInterval(temp);
-    store.dispatch({ type: CLEAR_ARRAY });
-  }, (Math.max(...Boxes) * RefreshInput * 1000) + 5000);
   return Boxes;
 };
 
@@ -81,7 +74,7 @@ export default function Boxes(
   { ProbabilityInput, RefreshInput, StartButtonColor },
 ) {
   switch (type) {
-    case 'START_SIMULATION':
+    case START_SIMULATION:
       return createSetTimeoutArray(Boxes, ProbabilityInput, RefreshInput);
     case CHANGE_ARRAY_COLORS:
       if (StartButtonColor !== START_BUTTON_STOPPED_COLOR) {

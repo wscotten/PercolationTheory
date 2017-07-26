@@ -3,16 +3,20 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
-import './ReactotronConfig';
+import '/ReactotronConfig';
 import Index from '/app/';
 import reducers from '/app/reducers';
-import middleware from '/app/middleware';
+import {
+  startButtonMiddleware,
+  boxesMiddleware,
+} from '/app/middleware';
 
 export const store = Reactotron.createStore(
   reducers,
   applyMiddleware(
     createLogger(),
-    middleware,
+    startButtonMiddleware,
+    boxesMiddleware,
   ),
 );
 

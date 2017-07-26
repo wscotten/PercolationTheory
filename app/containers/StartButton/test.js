@@ -1,8 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
-import { store } from './App';
-import StartButton from './index';
+import { store } from '/App';
+import StartButton from '/app/containers/StartButton';
 
 import {
   START_BUTTON_RUNNING_COLOR,

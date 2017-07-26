@@ -1,20 +1,18 @@
-import { store } from 'App';
+import { store } from '/App';
 import StartButton from '/app';
 
 import {
   START_BUTTON_RUNNING_COLOR,
   START_BUTTON_STOPPED_COLOR,
   INITIAL_ARRAY,
-  INITIAL_STATE,
   START_BUTTON_CLICKED,
-  CLEAR_ARRAY,
 } from '/app/constants';
 
-import middleware from './reducer';
+import middleware from '/app/middleware';
 
 describe('should turn red', () => {
   it('has 5 inputs valid and running', () => {
-    expect(reducer(
+    expect(middleware(
       START_BUTTON_RUNNING_COLOR,
       { type: START_BUTTON_CLICKED },
       {
