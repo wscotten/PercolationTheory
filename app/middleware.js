@@ -30,14 +30,13 @@ export const startButtonMiddleware = store => next => (action) => {
     case START_BUTTON_CLICKED:
       if (StartButtonColor === START_BUTTON_RUNNING_COLOR) {
         store.dispatch({ type: CLEAR_ARRAY });
-        store.dispatch({ type: SWAP_START_BUTTON_COLOR });
         return next(action);
       } else if (
         Probability > 0 && Probability <= 1 &&
         Refresh > 0 && Refresh <= 1 &&
         Recovery > 0 && Recovery <= 1 &&
-        Rows > 0 && Rows <= 20 && Number.isInteger(Rows) &&
-        Columns > 0 && Columns <= 20 && Number.isInteger(Columns) &&
+        Rows > 0 && Rows <= 100 && Number.isInteger(Rows) &&
+        Columns > 0 && Columns <= 100 && Number.isInteger(Columns) &&
         (Boxes.indexOf(-1) !== -1)
       ) {
         store.dispatch({ type: SWAP_START_BUTTON_COLOR });
@@ -69,7 +68,7 @@ export const boxesMiddleware = store => next => (action) => {
         setTimeout(() => {
           store.dispatch({ type: CLEAR_ARRAY });
         }, RefreshInput * 1000);
-      } else {
+      } else if (!(Math.max(...Boxes) === 0 && Math.min(...Boxes) === 0)) {
         setTimeout(() => {
           store.dispatch({ type: CHANGE_ARRAY_COLORS });
         }, RefreshInput * 1000);
@@ -87,7 +86,7 @@ export const rowsAndColumnsMiddleware = store => next => (action) => {
         action.text !== '' &&
         Number.isInteger(Number(action.text)) &&
         Number(action.text) > 0 &&
-        Number(action.text) <= 20
+        Number(action.text) <= 100
       ) {
         store.dispatch({
           type: UPDATE_GRID_COLUMNS,
@@ -100,7 +99,7 @@ export const rowsAndColumnsMiddleware = store => next => (action) => {
         action.text !== '' &&
         Number.isInteger(Number(action.text)) &&
         Number(action.text) > 0 &&
-        Number(action.text) <= 20
+        Number(action.text) <= 100
       ) {
         store.dispatch({
           type: UPDATE_GRID_ROWS,

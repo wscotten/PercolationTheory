@@ -1,9 +1,6 @@
-import Reactotron from 'reactotron-react-native';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { applyMiddleware } from 'redux';
-import { createLogger } from 'redux-logger';
-import '/ReactotronConfig';
+import { createStore, applyMiddleware } from 'redux';
 import Index from '/app/';
 import reducers from '/app/reducers';
 import {
@@ -12,14 +9,20 @@ import {
   rowsAndColumnsMiddleware,
 } from '/app/middleware';
 
-export const store = Reactotron.createStore(
+const middlewares = [
+  startButtonMiddleware,
+  boxesMiddleware,
+  rowsAndColumnsMiddleware,
+];
+
+if (process.env.NODE_ENV === 'development') {
+  const { logger } = require(`redux-logger`);
+  middlewares.push(logger);
+}
+
+export const store = createStore(
   reducers,
-  applyMiddleware(
-    createLogger(),
-    startButtonMiddleware,
-    boxesMiddleware,
-    rowsAndColumnsMiddleware,
-  ),
+  applyMiddleware(...middlewares),
 );
 
 export default function Main() {

@@ -30,7 +30,6 @@ const createSetTimeoutArray = (Boxes, ProbabilityInput, ColumnsInput) => {
   };
   let counter = 0;
   while (Boxes.indexOf(0) !== -1) {
-    console.log(1);
     counter += 1;
     Boxes = Boxes.map((box, i) => {
       if (box !== 0) return box;
@@ -88,20 +87,23 @@ export default function Boxes(
     case START_SIMULATION:
       return createSetTimeoutArray(Boxes, ProbabilityInput, ColumnsInput);
     case CHANGE_ARRAY_COLORS:
-      return Boxes.map((box) => {
-        switch (true) {
-          case (box === -2):
-          case (box > 0):
-            return box - 1;
-          case (box === 0):
-            if (Math.random() < RecoveryInput) {
-              return -2;
-            }
-            return box - 1;
-          default:
-            return box;
-        }
-      });
+      if (!(Math.max(...Boxes) === 0 && Math.min(...Boxes) === 0)) {
+        return Boxes.map((box) => {
+          switch (true) {
+            case (box === -2):
+            case (box > 0):
+              return box - 1;
+            case (box === 0):
+              if (Math.random() < RecoveryInput) {
+                return -2;
+              }
+              return box - 1;
+            default:
+              return box;
+          }
+        });
+      }
+      return Boxes;
     case ROTATE_COLOR:
       if (StartButtonColor !== START_BUTTON_RUNNING_COLOR) {
         return Boxes.map((box, index) => {

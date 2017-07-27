@@ -41,12 +41,12 @@ export default function index() {
         </RecoveryContainer>
         <RowsContainer>
           <RowsText>Rows</RowsText>
-          <RowsText>(1 - 20)</RowsText>
+          <RowsText>(1 - 100)</RowsText>
           <RowsInput />
         </RowsContainer>
         <ColumnsContainer>
           <ColumnsText>Columns</ColumnsText>
-          <ColumnsText>(1 - 20)</ColumnsText>
+          <ColumnsText>(1 - 100)</ColumnsText>
           <ColumnsInput />
         </ColumnsContainer>
         <StartButton />

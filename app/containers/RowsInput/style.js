@@ -12,7 +12,7 @@ const style = ({ onChangeText }) => (
       marginLeft: '10%',
     }}
     keyboardType={'numeric'}
-    maxLength={2}
+    maxLength={3}
     onChangeText={text => onChangeText(text)}
   />
 );
