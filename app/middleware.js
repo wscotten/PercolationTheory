@@ -126,7 +126,6 @@ export const rowsAndColumnsMiddleware = store => next => (action) => {
           type: UPDATE_GRID_COLUMNS,
           text: action.text,
           RowsInput,
-          ColumnsInput,
         });
       }
       return next(action);
@@ -140,7 +139,6 @@ export const rowsAndColumnsMiddleware = store => next => (action) => {
         store.dispatch({
           type: UPDATE_GRID_ROWS,
           text: action.text,
-          RowsInput,
           ColumnsInput,
         });
       }

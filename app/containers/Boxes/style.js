@@ -64,6 +64,7 @@ const blockDivs = (Boxes, onClick, widthPercentage, heightPercentage) =>
 export default function style({ Boxes, RowsInput, ColumnsInput, onClick }) {
   const widthPercentage = ((1 / ColumnsInput) * 99.99).toString().concat('%');
   const heightPercentage = ((1 / RowsInput) * 55).toString().concat('%');
+  console.log('called');
   return (
     <View
       style={{

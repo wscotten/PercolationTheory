@@ -8,13 +8,11 @@ const mapStateToProps = ({ Boxes, RowsInput, ColumnsInput }) => ({
   ColumnsInput,
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onClick: (i, value) => {
-      dispatch(rotateColor(i, value));
-    },
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  onClick: (i, value) => {
+    dispatch(rotateColor(i, value));
+  },
+});
 
 const Boxes = connect(
   mapStateToProps,

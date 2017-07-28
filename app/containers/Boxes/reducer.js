@@ -75,6 +75,7 @@ export default function Boxes(
     type,
     i,
     value,
+    text,
     ProbabilityInput,
     RecoveryInput,
     RowsInput,
@@ -83,7 +84,9 @@ export default function Boxes(
 ) {
   switch (type) {
     case UPDATE_GRID_COLUMNS:
+      return Array(Number(RowsInput) * Number(text)).fill(0);
     case UPDATE_GRID_ROWS:
+      return Array(Number(text) * Number(ColumnsInput)).fill(0);
     case CLEAR_ARRAY:
       return Array(Number(RowsInput) * Number(ColumnsInput)).fill(0);
     case START_SIMULATION:
