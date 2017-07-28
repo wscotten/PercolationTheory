@@ -88,7 +88,7 @@ export default function Boxes(
     case UPDATE_GRID_ROWS:
       return Array(Number(text) * Number(ColumnsInput)).fill(0);
     case CLEAR_ARRAY:
-      return Array(Number(RowsInput) * Number(ColumnsInput)).fill(0);
+      return INITIAL_ARRAY;
     case START_SIMULATION:
       return createSetTimeoutArray(Boxes, ProbabilityInput, ColumnsInput);
     case CHANGE_ARRAY_COLORS:

@@ -22,7 +22,12 @@ import GridBoxes from './containers/Boxes';
 
 export default function index() {
   return (
-    <View>
+    <View
+      style={{
+        width: '100%',
+        height: '100%',
+      }}
+    >
       <TextContainer>
         <ProbabilityContainer>
           <ProbabilityText>Probability</ProbabilityText>
