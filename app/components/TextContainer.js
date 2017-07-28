@@ -5,7 +5,7 @@ const TextContainer = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-  height: 25%;
+  height: 30%;
 `;
 
 export default TextContainer;

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 
 export default function style({ Boxes, RowsInput, ColumnsInput, onClick }) {
   const widthPercentage = (100 / ColumnsInput).toString().concat('%');
@@ -22,13 +22,13 @@ export default function style({ Boxes, RowsInput, ColumnsInput, onClick }) {
     <View
       style={{
         width: '100%',
-        height: '75%',
+        height: '70%',
         flexDirection: 'row',
         flexWrap: 'wrap',
       }}
     >
       {Boxes.map((block, i) =>
-        (<View
+        (<TouchableOpacity
           style={{
             width: widthPercentage,
             height: heightPercentage,
@@ -36,6 +36,7 @@ export default function style({ Boxes, RowsInput, ColumnsInput, onClick }) {
             backgroundColor: getColor(block),
           }}
           key={i.toString()}
+          onPress={() => onClick(i, block)}
         />),
       )}
     </View>

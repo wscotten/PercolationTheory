@@ -1,7 +1,7 @@
-export const GRID_COLUMNS = '10';
-export const GRID_ROWS = '10';
+export const GRID_COLUMNS = '50';
+export const GRID_ROWS = '50';
 export const INITIAL_PROBABILITY_INPUT = '.5';
-export const INITIAL_REFRESH_INPUT = '.016';
+export const INITIAL_REFRESH_INPUT = '.316';
 export const INITIAL_RECOVERY_INPUT = '.5';
 export const INITIAL_ARRAY = Array(
   Number(GRID_COLUMNS) * Number(GRID_ROWS),
