@@ -7,11 +7,13 @@ export const receiveInput = text => ({
   text,
 });
 
-export default function ColumnsInput(ColumnsInput, { type, text }) {
+const ColumnsInput = (ColumnsInput = '50', { type, text }) => {
   switch (type) {
     case UPDATE_GRID_COLUMNS:
       return text;
     default:
       return ColumnsInput;
   }
-}
+};
+
+export default ColumnsInput;

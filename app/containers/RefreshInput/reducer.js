@@ -5,11 +5,13 @@ export const receiveInput = text => ({
   text,
 });
 
-export default function RefreshInput(RefreshInput, { type, text }) {
+const RefreshInput = (RefreshInput = '.017', { type, text }) => {
   switch (type) {
     case UPDATE_REFRESH_INPUT:
       return text;
     default:
       return RefreshInput;
   }
-}
+};
+
+export default RefreshInput;

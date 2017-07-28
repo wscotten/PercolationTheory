@@ -1,12 +1,13 @@
 import {
-  START_BUTTON_RUNNING_COLOR,
   START_SIMULATION,
   UPDATE_COLUMNS_INPUT,
   UPDATE_ROWS_INPUT,
+  CHANGE_ARRAY_COLORS,
+  CLEAR_ARRAY,
+  ROTATE_COLOR_TRUE,
+  INITIAL_ARRAY,
 } from '/app/constants';
 
-const CHANGE_ARRAY_COLORS = 'CHANGE_ARRAY_COLORS';
-const CLEAR_ARRAY = 'CLEAR_ARRAY';
 const ROTATE_COLOR = 'ROTATE_COLOR';
 
 export const rotateColor = (i, value) => ({
@@ -69,12 +70,13 @@ const createSetTimeoutArray = (Boxes, ProbabilityInput, ColumnsInput) => {
 };
 
 export default function Boxes(
-  Boxes,
-  { type, i, value },
+  Boxes = INITIAL_ARRAY,
   {
+    type,
+    i,
+    value,
     ProbabilityInput,
     RecoveryInput,
-    StartButtonColor,
     RowsInput,
     ColumnsInput,
   },
@@ -104,21 +106,18 @@ export default function Boxes(
         });
       }
       return Boxes;
-    case ROTATE_COLOR:
-      if (StartButtonColor !== START_BUTTON_RUNNING_COLOR) {
-        return Boxes.map((box, index) => {
-          if (index === i) {
-            if (value === -4) {
-              return 0;
-            } else if (value === -1) {
-              return -4;
-            }
-            return -1;
+    case ROTATE_COLOR_TRUE:
+      return Boxes.map((box, index) => {
+        if (index === i) {
+          if (value === -4) {
+            return 0;
+          } else if (value === -1) {
+            return -4;
           }
-          return box;
-        });
-      }
-      return Boxes;
+          return -1;
+        }
+        return box;
+      });
     default:
       return Boxes;
   }

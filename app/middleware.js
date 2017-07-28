@@ -9,6 +9,8 @@ import {
   UPDATE_GRID_COLUMNS,
   UPDATE_ROWS_INPUT,
   UPDATE_COLUMNS_INPUT,
+  ROTATE_COLOR,
+  ROTATE_COLOR_TRUE,
  } from '/app/constants';
 
 export const startButtonMiddleware = store => next => (action) => {
@@ -29,7 +31,11 @@ export const startButtonMiddleware = store => next => (action) => {
   switch (action.type) {
     case START_BUTTON_CLICKED:
       if (StartButtonColor === START_BUTTON_RUNNING_COLOR) {
-        store.dispatch({ type: CLEAR_ARRAY });
+        store.dispatch({
+          type: CLEAR_ARRAY,
+          RowsInput,
+          ColumnsInput,
+        });
         return next(action);
       } else if (
         Probability > 0 && Probability <= 1 &&
@@ -40,7 +46,11 @@ export const startButtonMiddleware = store => next => (action) => {
         (Boxes.indexOf(-1) !== -1)
       ) {
         store.dispatch({ type: SWAP_START_BUTTON_COLOR });
-        store.dispatch({ type: START_SIMULATION });
+        store.dispatch({
+          type: START_SIMULATION,
+          ProbabilityInput,
+          ColumnsInput,
+        });
         return next(action);
       }
       return next(action);
@@ -56,22 +66,45 @@ export const boxesMiddleware = store => next => (action) => {
   const {
     RefreshInput,
     Boxes,
+    RecoveryInput,
+    StartButtonColor,
+    RowsInput,
+    ColumnsInput,
   } = store.getState();
   switch (action.type) {
     case START_SIMULATION:
       setTimeout(() => {
-        store.dispatch({ type: CHANGE_ARRAY_COLORS });
+        store.dispatch({
+          type: CHANGE_ARRAY_COLORS,
+          RecoveryInput,
+        });
       }, RefreshInput * 1000);
       return next(action);
     case CHANGE_ARRAY_COLORS:
       if (Math.max(...Boxes) <= -1) {
         setTimeout(() => {
-          store.dispatch({ type: CLEAR_ARRAY });
-        }, RefreshInput * 1000);
+          store.dispatch({
+            type: CLEAR_ARRAY,
+            RowsInput,
+            ColumnsInput,
+          });
+        }, 1000);
       } else if (!(Math.max(...Boxes) === 0 && Math.min(...Boxes) === 0)) {
         setTimeout(() => {
-          store.dispatch({ type: CHANGE_ARRAY_COLORS });
+          store.dispatch({
+            type: CHANGE_ARRAY_COLORS,
+            RecoveryInput,
+          });
         }, RefreshInput * 1000);
+      }
+      return next(action);
+    case ROTATE_COLOR:
+      if (StartButtonColor !== START_BUTTON_RUNNING_COLOR) {
+        store.dispatch({
+          type: ROTATE_COLOR_TRUE,
+          i: action.i,
+          value: action.value,
+        });
       }
       return next(action);
     default:

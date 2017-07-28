@@ -1,17 +1,8 @@
-export const GRID_WIDTH = 10;
-export const GRID_HEIGHT = 15;
+export const GRID_WIDTH = 50;
+export const GRID_HEIGHT = 50;
 export const INITIAL_ARRAY = Array(GRID_WIDTH * GRID_HEIGHT).fill(0);
 export const START_BUTTON_RUNNING_COLOR = '#4484CE';
 export const START_BUTTON_STOPPED_COLOR = 'red';
-export const INITIAL_STATE = {
-  ProbabilityInput: '',
-  RefreshInput: '',
-  RecoveryInput: '',
-  RowsInput: '15',
-  ColumnsInput: '10',
-  StartButtonColor: START_BUTTON_STOPPED_COLOR,
-  Boxes: INITIAL_ARRAY,
-};
 export const START_BUTTON_CLICKED = 'START_BUTTON_CLICKED';
 export const CLEAR_ARRAY = 'CLEAR_ARRAY';
 export const SWAP_START_BUTTON_COLOR = 'SWAP_START_BUTTON_COLOR';
@@ -22,3 +13,5 @@ export const UPDATE_ROWS_INPUT = 'UPDATE_ROWS_INPUT';
 export const UPDATE_COLUMNS_INPUT = 'UPDATE_COLUMNS_INPUT';
 export const UPDATE_GRID_COLUMNS = 'UPDATE_GRID_COLUMNS';
 export const UPDATE_GRID_ROWS = 'UPDATE_GRID_ROWS';
+export const ROTATE_COLOR_TRUE = 'ROTATE_COLOR_TRUE';
+export const ROTATE_COLOR = 'ROTATE_COLOR';
