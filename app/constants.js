@@ -1,6 +1,11 @@
-export const GRID_WIDTH = 50;
-export const GRID_HEIGHT = 50;
-export const INITIAL_ARRAY = Array(GRID_WIDTH * GRID_HEIGHT).fill(0);
+export const GRID_COLUMNS = '50';
+export const GRID_ROWS = '50';
+export const INITIAL_PROBABILITY_INPUT = '.5';
+export const INITIAL_REFRESH_INPUT = '.016';
+export const INITIAL_RECOVERY_INPUT = '.5';
+export const INITIAL_ARRAY = Array(
+  Number(GRID_COLUMNS) * Number(GRID_ROWS),
+).fill(0);
 export const START_BUTTON_RUNNING_COLOR = '#4484CE';
 export const START_BUTTON_STOPPED_COLOR = 'red';
 export const START_BUTTON_CLICKED = 'START_BUTTON_CLICKED';

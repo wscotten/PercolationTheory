@@ -1,11 +1,11 @@
 import {
   START_SIMULATION,
-  UPDATE_COLUMNS_INPUT,
-  UPDATE_ROWS_INPUT,
   CHANGE_ARRAY_COLORS,
   CLEAR_ARRAY,
   ROTATE_COLOR_TRUE,
   INITIAL_ARRAY,
+  UPDATE_GRID_COLUMNS,
+  UPDATE_GRID_ROWS,
 } from '/app/constants';
 
 const ROTATE_COLOR = 'ROTATE_COLOR';
@@ -82,10 +82,10 @@ export default function Boxes(
   },
 ) {
   switch (type) {
-    case UPDATE_ROWS_INPUT:
-    case UPDATE_COLUMNS_INPUT:
+    case UPDATE_GRID_COLUMNS:
+    case UPDATE_GRID_ROWS:
     case CLEAR_ARRAY:
-      return Array(RowsInput * ColumnsInput).fill(0);
+      return Array(Number(RowsInput) * Number(ColumnsInput)).fill(0);
     case START_SIMULATION:
       return createSetTimeoutArray(Boxes, ProbabilityInput, ColumnsInput);
     case CHANGE_ARRAY_COLORS:

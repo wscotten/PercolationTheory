@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TextInput } from 'react-native';
 
+import { GRID_COLUMNS } from '/app/constants';
+
 const style = ({ onChangeText }) => (
   <TextInput
     style={{
@@ -13,6 +15,7 @@ const style = ({ onChangeText }) => (
     }}
     keyboardType={'numeric'}
     maxLength={3}
+    defaultValue={GRID_COLUMNS}
     onChangeText={text => onChangeText(text)}
   />
 );

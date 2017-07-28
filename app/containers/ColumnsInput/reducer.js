@@ -1,4 +1,4 @@
-import { UPDATE_GRID_COLUMNS } from '/app/constants';
+import { UPDATE_GRID_COLUMNS, GRID_COLUMNS } from '/app/constants';
 
 const UPDATE_COLUMNS_INPUT = 'UPDATE_COLUMNS_INPUT';
 
@@ -7,7 +7,7 @@ export const receiveInput = text => ({
   text,
 });
 
-const ColumnsInput = (ColumnsInput = '50', { type, text }) => {
+const ColumnsInput = (ColumnsInput = GRID_COLUMNS, { type, text }) => {
   switch (type) {
     case UPDATE_GRID_COLUMNS:
       return text;

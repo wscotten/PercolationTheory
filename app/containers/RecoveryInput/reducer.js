@@ -1,3 +1,5 @@
+import { INITIAL_RECOVERY_INPUT } from '/app/constants';
+
 const UPDATE_RECOVERY_INPUT = 'UPDATE_RECOVERY_INPUT';
 
 export const receiveInput = text => ({
@@ -5,7 +7,10 @@ export const receiveInput = text => ({
   text,
 });
 
-const RecoveryInput = (RecoveryInput = '.5', { type, text }) => {
+const RecoveryInput = (
+  RecoveryInput = INITIAL_RECOVERY_INPUT,
+  { type, text },
+) => {
   switch (type) {
     case UPDATE_RECOVERY_INPUT:
       return text;

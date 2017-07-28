@@ -1,3 +1,5 @@
+import { INITIAL_PROBABILITY_INPUT } from '/app/constants';
+
 const UPDATE_PROBABILITY_INPUT = 'UPDATE_PROBABILITY_INPUT';
 
 export const receiveInput = text => ({
@@ -5,7 +7,10 @@ export const receiveInput = text => ({
   text,
 });
 
-const ProbabilityInput = (ProbabilityInput = '.5', { type, text }) => {
+const ProbabilityInput = (
+  ProbabilityInput = INITIAL_PROBABILITY_INPUT,
+  { type, text },
+) => {
   switch (type) {
     case UPDATE_PROBABILITY_INPUT:
       return text;
