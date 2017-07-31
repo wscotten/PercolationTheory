@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import Index from '/app/';
+import Index from '/app/index';
 import reducers from '/app/reducers';
 import {
   startButtonMiddleware,

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "babel-root-slash-import": "^1.1.0",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.2",
     "eslint-config-airbnb-base": "^11.2.0",
@@ -30,11 +30,12 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "expo": "^18.0.3",
+    "babel-root-slash-import": "^1.1.0",
+    "expo": "^19.0.0",
     "jest-cli": "^20.0.4",
     "prop-types": "^15.5.10",
     "react": "16.0.0-alpha.12",
-    "react-native": "^0.45.1",
+    "react-native": "^0.46.1",
     "react-redux": "^5.0.5",
     "redux": "^3.7.2",
     "styled-components": "^2.1.1"
