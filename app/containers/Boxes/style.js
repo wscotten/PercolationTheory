@@ -43,9 +43,9 @@ export default function style({ Boxes, RowsInput, ColumnsInput, onClick }) {
   );
 }
 
-style.propTypes = {
-  Boxes: PropTypes.arrayOf(React.PropTypes.number).isRequired,
-  RowsInput: PropTypes.string.isRequired,
-  ColumnsInput: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
-};
+// style.propTypes = {
+//   Boxes: PropTypes.arrayOf(React.PropTypes.number).isRequired,
+//   RowsInput: PropTypes.string.isRequired,
+//   ColumnsInput: PropTypes.string.isRequired,
+//   onClick: PropTypes.func.isRequired,
+// };
