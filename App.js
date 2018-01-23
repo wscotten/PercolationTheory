@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import Index from '/app/index';
+import App from '/app/index';
 import reducers from '/app/reducers';
 import {
   startButtonMiddleware,
@@ -17,7 +17,7 @@ const middlewares = [
 
 if (process.env.NODE_ENV === 'development') {
   const { logger } = require('redux-logger');
-  middlewares.push(logger);
+  // middlewares.push(logger);
 }
 
 export const store = createStore(
@@ -28,7 +28,7 @@ export const store = createStore(
 export default function Main() {
   return (
     <Provider store={store}>
-      <Index />
+      <App />
     </Provider>
   );
 }
