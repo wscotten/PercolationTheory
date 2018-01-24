@@ -16,14 +16,14 @@ export const rotateColor = (i, value) => ({
   value,
 });
 
-const createSetTimeoutArray = (Boxes, ProbabilityInput, ColumnsInput) => {
-  const ColumnsNumber = Number(ColumnsInput);
+const createSetTimeoutArray = (Boxes, probability, columns) => {
+  const ColumnsNumber = Number(columns);
   const checkSurroundingBoxes = (Boxes, box, i, counter, surroundingBoxes) => {
     const flaggedSurroundingBoxes = surroundingBoxes.filter(box =>
       Boxes[box] !== undefined && (Boxes[box] === -1 || Boxes[box] > 0),
     );
     for (let i = 0; i < flaggedSurroundingBoxes.length; i += 1) {
-      if (Math.random() < ProbabilityInput) {
+      if (Math.random() < probability) {
         return counter;
       }
     }
@@ -76,22 +76,21 @@ export default function Boxes(
     i,
     value,
     text,
-    ProbabilityInput,
-    RecoveryInput,
-    RowsInput,
-    ColumnsInput,
+    probability,
+    recovery,
+    rows,
+    columns,
   },
 ) {
   switch (type) {
     case UPDATE_GRID_COLUMNS:
-      return Array(Number(RowsInput) * Number(text)).fill(0);
+      return Array(Number(rows) * Number(text)).fill(0);
     case UPDATE_GRID_ROWS:
-      return Array(Number(text) * Number(ColumnsInput)).fill(0);
+      return Array(Number(text) * Number(columns)).fill(0);
     case CLEAR_ARRAY:
-      return Array(Number(RowsInput) * Number(ColumnsInput)).fill(0);
-      // return INITIAL_ARRAY;
+      return Array(Number(rows) * Number(columns)).fill(0);
     case START_SIMULATION:
-      return createSetTimeoutArray(Boxes, ProbabilityInput, ColumnsInput);
+      return createSetTimeoutArray(Boxes, probability, columns);
     case CHANGE_ARRAY_COLORS:
       if (!(Math.max(...Boxes) === 0 && Math.min(...Boxes) === 0)) {
         return Boxes.map((box) => {
@@ -100,7 +99,7 @@ export default function Boxes(
             case (box > 0):
               return box - 1;
             case (box === 0):
-              if (Math.random() < RecoveryInput) {
+              if (Math.random() < recovery) {
                 return -2;
               }
               return box - 1;

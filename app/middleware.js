@@ -1,3 +1,4 @@
+import { FORM_CHANGE } from './redux';
 import {
   START_BUTTON_RUNNING_COLOR,
   START_BUTTON_CLICKED,
@@ -13,28 +14,31 @@ import {
   ROTATE_COLOR_TRUE,
  } from '/app/constants';
 
+
 export const startButtonMiddleware = store => next => (action) => {
   const {
+    form: {
+      probability,
+      refresh,
+      recovery,
+      rows,
+      columns,
+    },
     StartButtonColor,
-    ProbabilityInput,
-    RefreshInput,
-    RecoveryInput,
-    RowsInput,
-    ColumnsInput,
     Boxes,
   } = store.getState();
-  const Probability = parseFloat(ProbabilityInput);
-  const Refresh = parseFloat(RefreshInput);
-  const Recovery = parseFloat(RecoveryInput);
-  const Rows = Number(RowsInput);
-  const Columns = Number(ColumnsInput);
+  const Probability = parseFloat(probability);
+  const Refresh = parseFloat(refresh);
+  const Recovery = parseFloat(recovery);
+  const Rows = Number(rows);
+  const Columns = Number(columns);
   switch (action.type) {
     case START_BUTTON_CLICKED:
       if (StartButtonColor === START_BUTTON_RUNNING_COLOR) {
         store.dispatch({
           type: CLEAR_ARRAY,
-          RowsInput,
-          ColumnsInput,
+          rows,
+          columns,
         });
         return next(action);
       } else if (
@@ -48,8 +52,8 @@ export const startButtonMiddleware = store => next => (action) => {
         store.dispatch({ type: SWAP_START_BUTTON_COLOR });
         store.dispatch({
           type: START_SIMULATION,
-          ProbabilityInput,
-          ColumnsInput,
+          probability,
+          columns,
         });
         return next(action);
       }
@@ -64,38 +68,40 @@ export const startButtonMiddleware = store => next => (action) => {
 
 export const boxesMiddleware = store => next => (action) => {
   const {
-    RefreshInput,
+    form: {
+      refresh,
+      recovery,
+      rows,
+      columns,
+    },
     Boxes,
-    RecoveryInput,
     StartButtonColor,
-    RowsInput,
-    ColumnsInput,
   } = store.getState();
   switch (action.type) {
     case START_SIMULATION:
       setTimeout(() => {
         store.dispatch({
           type: CHANGE_ARRAY_COLORS,
-          RecoveryInput,
+          recovery,
         });
-      }, RefreshInput * 1000);
+      }, refresh * 1000);
       return next(action);
     case CHANGE_ARRAY_COLORS:
       if (Math.max(...Boxes) <= -1) {
         setTimeout(() => {
           store.dispatch({
             type: CLEAR_ARRAY,
-            RowsInput,
-            ColumnsInput,
+            rows,
+            columns,
           });
         }, 1000);
       } else if (!(Math.max(...Boxes) === 0 && Math.min(...Boxes) === 0)) {
         setTimeout(() => {
           store.dispatch({
             type: CHANGE_ARRAY_COLORS,
-            RecoveryInput,
+            recovery,
           });
-        }, RefreshInput * 1000);
+        }, refresh * 1000);
       }
       return next(action);
     case ROTATE_COLOR:
@@ -113,20 +119,36 @@ export const boxesMiddleware = store => next => (action) => {
 };
 
 export const rowsAndColumnsMiddleware = store => next => (action) => {
-  const { RowsInput, ColumnsInput } = store.getState();
+  const {
+    form: {
+      rows,
+      columns,
+    },
+   } = store.getState();
   switch (action.type) {
-    case UPDATE_COLUMNS_INPUT:
-      if (
-        action.text !== '' &&
-        Number.isInteger(Number(action.text)) &&
-        Number(action.text) > 0 &&
-        Number(action.text) <= 100
-      ) {
-        store.dispatch({
-          type: UPDATE_GRID_COLUMNS,
-          text: action.text,
-          RowsInput,
-        });
+    case FORM_CHANGE:
+      if (action.name === 'rows' || action.name === 'columns') {
+        if (
+          action.text !== '' &&
+          Number.isInteger(Number(action.text)) &&
+          Number(action.text) > 0 &&
+          Number(action.text) <= 100
+        ) {
+          if (action.name === 'rows') {
+            store.dispatch({
+              type: UPDATE_GRID_ROWS,
+              text: action.text,
+              columns,
+            });
+          }
+          if (action.name === 'columns') {
+            store.dispatch({
+              type: UPDATE_GRID_COLUMNS,
+              text: action.text,
+              rows,
+            });
+          }
+        }
       }
       return next(action);
     case UPDATE_ROWS_INPUT:
@@ -139,7 +161,7 @@ export const rowsAndColumnsMiddleware = store => next => (action) => {
         store.dispatch({
           type: UPDATE_GRID_ROWS,
           text: action.text,
-          ColumnsInput,
+          columns,
         });
       }
       return next(action);

@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, TouchableOpacity } from 'react-native';
 
-export default function style({ Boxes, RowsInput, ColumnsInput, onClick }) {
-  const widthPercentage = (100 / ColumnsInput).toString().concat('%');
-  const heightPercentage = (100 / RowsInput).toString().concat('%');
+export default function style({ Boxes, rows, columns, onClick }) {
+  const widthPercentage = (100 / (columns | 1)).toString().concat('%');
+  const heightPercentage = (100 / (rows | 1)).toString().concat('%');
   const getColor = (number) => {
     switch (number) {
       case -4:
@@ -45,7 +45,7 @@ export default function style({ Boxes, RowsInput, ColumnsInput, onClick }) {
 
 // style.propTypes = {
 //   Boxes: PropTypes.arrayOf(React.PropTypes.number).isRequired,
-//   RowsInput: PropTypes.string.isRequired,
-//   ColumnsInput: PropTypes.string.isRequired,
+//   rows: PropTypes.string.isRequired,
+//   columns: PropTypes.string.isRequired,
 //   onClick: PropTypes.func.isRequired,
 // };
