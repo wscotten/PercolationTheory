@@ -1,17 +1,8 @@
 import React, { PureComponent } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
+import FormContainer from './components/FormContainer';
 import TextContainer from './components/TextContainer';
-import ProbabilityContainer from './components/ProbabilityContainer';
-import ProbabilityText from './components/ProbabilityText';
-import RefreshContainer from './components/RefreshContainer';
-import RefreshText from './components/RefreshText';
-import RecoveryContainer from './components/RecoveryContainer';
-import RecoveryText from './components/RecoveryText';
-import RowsContainer from './components/RowsContainer';
-import RowsText from './components/RowsText';
-import ColumnsContainer from './components/ColumnsContainer';
-import ColumnsText from './components/ColumnsText';
 import StartButton from './containers/StartButton';
 import GridBoxes from './containers/Boxes';
 import Input from './components/Input';
@@ -29,54 +20,54 @@ class App extends PureComponent {
     } = this.props;
     return (
       <View>
-        <TextContainer>
-          <ProbabilityContainer>
-            <ProbabilityText>Probability</ProbabilityText>
-            <ProbabilityText>(0 - 1)</ProbabilityText>
+        <FormContainer>
+          <TextContainer>
+            <Text>Probability</Text>
+            <Text>(0 - 1)</Text>
             <Input
               onChange={onChange}
               name="probability"
               value={probability}
             />
-          </ProbabilityContainer>
-          <RefreshContainer>
-            <RefreshText>Refresh</RefreshText>
-            <RefreshText>(0 - 1)</RefreshText>
+          </TextContainer>
+          <TextContainer>
+            <Text>Refresh</Text>
+            <Text>(0 - 1)</Text>
             <Input
               onChange={onChange}
               name="refresh"
               value={refresh}
             />
-          </RefreshContainer>
-          <RecoveryContainer>
-            <RecoveryText>Recovery</RecoveryText>
-            <RecoveryText>(0 - 1)</RecoveryText>
+          </TextContainer>
+          <TextContainer>
+            <Text>Recovery</Text>
+            <Text>(0 - 1)</Text>
             <Input
               onChange={onChange}
               name="recovery"
               value={recovery}
             />
-          </RecoveryContainer>
-          <RowsContainer>
-            <RowsText>Rows</RowsText>
-            <RowsText>(1 - 100)</RowsText>
+          </TextContainer>
+          <TextContainer>
+            <Text>Rows</Text>
+            <Text>(1 - 100)</Text>
             <Input
               onChange={onChange}
               name="rows"
               value={rows}
             />
-          </RowsContainer>
-          <ColumnsContainer>
-            <ColumnsText>Columns</ColumnsText>
-            <ColumnsText>(1 - 100)</ColumnsText>
+          </TextContainer>
+          <TextContainer>
+            <Text>Columns</Text>
+            <Text>(1 - 100)</Text>
             <Input
               onChange={onChange}
               name="columns"
               value={columns}
             />
-          </ColumnsContainer>
+          </TextContainer>
           <StartButton />
-        </TextContainer>
+        </FormContainer>
         <GridBoxes />
       </View>
     );
