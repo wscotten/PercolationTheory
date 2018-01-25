@@ -2,8 +2,8 @@ const initialForm = {
   probability: '.5',
   refresh: '.1',
   recovery: '.5',
-  rows: '5',
-  columns: '5',
+  rows: '50',
+  columns: '50',
 };
 
 export const FORM_CHANGE = 'FORM_CHANGE';

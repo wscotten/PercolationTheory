@@ -1,5 +1,5 @@
-export const GRID_COLUMNS = '5';
-export const GRID_ROWS = '5';
+export const GRID_COLUMNS = '50';
+export const GRID_ROWS = '50';
 export const INITIAL_PROBABILITY_INPUT = '.5';
 export const INITIAL_REFRESH_INPUT = '.1';
 export const INITIAL_RECOVERY_INPUT = '.5';
