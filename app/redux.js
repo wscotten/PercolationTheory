@@ -14,7 +14,7 @@ export const onChange = ({ text, name }) => ({
   name,
 });
 
-export const reducer = (
+export default (
   form = initialForm,
   { type, text, name },
 ) => {

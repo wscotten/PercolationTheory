@@ -1,22 +1,37 @@
-import { connect } from 'react-redux';
-import style from './style';
-import { startButtonClicked } from './reducer';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { TouchableOpacity, Keyboard, Text } from 'react-native';
 
-const mapStateToProps = ({ StartButtonColor }) => ({
-  StartButtonColor,
-});
+const style = ({ StartButtonColor, onStartClick }) => (
+  <TouchableOpacity
+    style={{
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: StartButtonColor,
+      borderWidth: 2,
+      borderTopWidth: 0,
+      borderColor: '#c3d7df',
+    }}
+    onPress={() => {
+      Keyboard.dismiss();
+      onStartClick();
+    }}
+  >
+    <Text
+      style={{
+        color: 'white',
+        fontSize: 30,
+      }}
+    >
+      Start
+    </Text>
+  </TouchableOpacity>
+);
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onStartClick: () => {
-      dispatch(startButtonClicked());
-    },
-  };
+style.propTypes = {
+  StartButtonColor: PropTypes.string.isRequired,
+  onStartClick: PropTypes.func.isRequired,
 };
 
-const StartContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(style);
-
-export default StartContainer;
+export default style;

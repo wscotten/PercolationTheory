@@ -7,6 +7,7 @@ import StartButton from './containers/StartButton';
 import GridBoxes from './containers/Boxes';
 import Input from './components/Input';
 import { onChange } from './redux';
+import { startButtonClicked } from './containers/StartButton/reducer';
 
 class App extends PureComponent {
   render() {
@@ -17,6 +18,8 @@ class App extends PureComponent {
       recovery,
       rows,
       columns,
+      StartButtonColor,
+      onStartClick,
     } = this.props;
     return (
       <View>
@@ -66,7 +69,10 @@ class App extends PureComponent {
               value={columns}
             />
           </TextContainer>
-          <StartButton />
+          <StartButton
+            StartButtonColor={StartButtonColor}
+            onStartClick={onStartClick}
+          />
         </FormContainer>
         <GridBoxes />
       </View>
@@ -80,11 +86,15 @@ const mapStateToProps = state => ({
   recovery: state.form.recovery,
   rows: state.form.rows,
   columns: state.form.columns,
+  StartButtonColor: state.StartButtonColor,
 });
 
 const mapDispatchToProps = dispatch => ({
   onChange: (payload) => {
     dispatch(onChange(payload));
+  },
+  onStartClick: () => {
+    dispatch(startButtonClicked());
   },
 });
 
