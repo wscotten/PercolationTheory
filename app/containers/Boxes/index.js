@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onClick: (i, value) => {
+  onPress: (i, value) => {
     dispatch(rotateColor(i, value));
   },
 });
@@ -23,7 +23,7 @@ class Boxes extends PureComponent {
       Boxes,
       rows,
       columns,
-      onClick
+      onPress
     } = this.props;
     const width = (100 / (columns || 1)).toString().concat('%');
     const height = (100 / (rows || 1)).toString().concat('%');
@@ -57,7 +57,7 @@ class Boxes extends PureComponent {
             backgroundColor={getColor(block)}
             key={index.toString()}
             index={index}
-            onClick={onClick}
+            onPress={onPress}
           />),
         )}
       </View>
@@ -70,9 +70,9 @@ export default connect(
   mapDispatchToProps,
 )(Boxes);
 
-// style.propTypes = {
-//   Boxes: PropTypes.arrayOf(React.PropTypes.number).isRequired,
-//   rows: PropTypes.string.isRequired,
-//   columns: PropTypes.string.isRequired,
-//   onClick: PropTypes.func.isRequired,
-// };
+Boxes.propTypes = {
+  Boxes: PropTypes.arrayOf(React.PropTypes.number).isRequired,
+  rows: PropTypes.string.isRequired,
+  columns: PropTypes.string.isRequired,
+  onPress: PropTypes.func.isRequired,
+};

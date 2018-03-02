@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { TouchableOpacity } from 'react-native';
 
 export default class Box extends PureComponent {
-  onClick = () => this.props.onClick(this.props.index, this.props.block)
+  onPress = () => this.props.onPress(this.props.index, this.props.block)
 
   render() {
     const {
@@ -21,7 +21,7 @@ export default class Box extends PureComponent {
           borderWidth: 1,
           backgroundColor,
         }}
-        onPress={this.onClick}
+        onPress={this.onPress}
       />
     );
   }
